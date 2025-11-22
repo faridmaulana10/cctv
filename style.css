@@ -1,0 +1,91 @@
+        /* index.php */
+        
+        /* end */
+
+
+        /* maps.php */
+        body { margin: 0; font-family: "Segoe UI", sans-serif; background-color:rgb(222, 234, 255); }
+        header, footer {
+            background: rgb(177, 93, 255);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+        nav {
+            text-align: center;
+            margin-top: 10px;
+        }
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            margin: 0 10px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            background-color: rgba(255,255,255,0.15);
+            transition: background 0.3s;
+        }
+        nav a:hover {
+            background-color: rgba(255,255,255,0.3);
+        }
+        .map-container {
+            max-width: 1000px;
+            margin: 30px auto 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+        .leaflet-popup-content {
+            font-size: 14px;
+        }
+        .info-box {
+            max-width: 1000px;
+            margin: 0 auto 40px;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            gap: 20px;
+        }
+        .info-item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            flex: 1;
+        }
+        .info-item h2 {
+            font-size: 18px;
+            margin: 0 0 10px;
+        }
+        .info-item p {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 0;
+        }
+        .on { color: green; }
+        .off { color: red; }
+        .popup-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 6px 14px;
+            background: linear-gradient(135deg, #f1f1f1, #dcdcdc);
+            color: #000;
+            font-size: 13px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            text-decoration: none;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .popup-btn:hover {
+            background: linear-gradient(135deg, #e0e0e0, #c0c0c0);
+            transform: scale(1.05);
+        }
+        /* end */
+
+        
