@@ -17,10 +17,26 @@
     },
     "2025-11-22": {
         "CCTV 1 - Celangapan": {
-            "car": 0.622,
-            "motorbike": 0.41,
+            "car": 0.575,
+            "motorbike": 0.0,
+            "bus": 0.422,
+            "truck": 0.426
+        }
+    },
+    "2025-11-23": {
+        "CCTV 1 - Celangapan": {
+            "car": 0.583,
+            "motorbike": 0.321,
             "bus": 0.0,
-            "truck": 0.586
+            "truck": 0.542
+        }
+    },
+    "2025-12-03": {
+        "CCTV 1 - Celangapan": {
+            "car": 0.485,
+            "motorbike": 0.371,
+            "bus": 0.0,
+            "truck": 0.681
         }
     }
 }

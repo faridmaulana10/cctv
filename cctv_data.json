@@ -19,12 +19,12 @@
     },
     {
         "id": 3,
-        "nama": "CCTV 1 - Tugu Pasar Rembang",
-        "video_id": "irid7d3FN8A",
-        "thumbnail": "uploads\/pasar_rembang.jpg",
-        "alamat": "Pasar Rembang",
-        "lat": "-6.710357",
-        "lng": "111.341629"
+        "nama": "CCTV1 - Pasar Pentungan",
+        "video_id": "FIrRTyG1OyE",
+        "thumbnail": "uploads\/pentungan1.jpg",
+        "alamat": "Pasar Pentungan",
+        "lat": "-6.702837",
+        "lng": "111.328593"
     },
     {
         "id": 5,
@@ -34,14 +34,5 @@
         "alamat": "Galonan Rembang",
         "lat": "-6.732886",
         "lng": "111.353908"
-    },
-    {
-        "id": 7,
-        "nama": "CCTV1 - Pasar Pentungan",
-        "video_id": "FIrRTyG1OyE",
-        "thumbnail": "uploads\/pentungan1.jpg",
-        "alamat": "Rembang",
-        "lat": "-6.702837",
-        "lng": "111.328593"
     }
 ]

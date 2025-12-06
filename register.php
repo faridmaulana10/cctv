@@ -1,29 +1,48 @@
 <?php
-session_start();
-$logoutMessage = '';
-if (isset($_GET['logout'])) {
-    $logoutMessage = 'Anda telah berhasil logout.';
-}
 include 'koneksi.php';
+session_start();
 
 $error = '';
+$success = '';
 
-if (isset($_POST['login'])) {
-    $user = $_POST['username'];
-    $pass = $_POST['password'];
-
-    $stmt = $conn->prepare("SELECT * FROM admin WHERE username = ? LIMIT 1");
-    $stmt->bind_param("s", $user);
-    $stmt->execute();
-    $result = $stmt->get_result()->fetch_assoc();
-
-    if ($result && hash('sha256', $pass) === $result['password']) {
-        $_SESSION['admin_logged'] = true;
-        $_SESSION['admin_name']   = $result['username'];
-        header("Location: dashboard.php");
-        exit;
+if (isset($_POST['register'])) {
+    $username = trim($_POST['username']);
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
+    
+    // Validasi input
+    if (empty($username) || empty($password) || empty($confirm_password)) {
+        $error = 'Semua field harus diisi!';
+    } elseif (strlen($password) < 6) {
+        $error = 'Password minimal 6 karakter!';
+    } elseif ($password !== $confirm_password) {
+        $error = 'Password dan konfirmasi password tidak cocok!';
     } else {
-        $error = 'Username / password salah';
+        // Cek apakah username sudah ada
+        $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows > 0) {
+            $error = 'Username sudah terdaftar!';
+        } else {
+            // Hash password
+            $hashed_password = hash('sha256', $password);
+            
+            // Insert ke database
+            $stmt = $conn->prepare("INSERT INTO users (username, password, created_at) VALUES (?, ?, NOW())");
+            $stmt->bind_param("ss", $username, $hashed_password);
+            
+            if ($stmt->execute()) {
+                $success = 'Registrasi berhasil! Silakan login.';
+                // Redirect ke login setelah 2 detik
+                header("refresh:2;url=login_user.php");
+            } else {
+                $error = 'Terjadi kesalahan saat registrasi. Silakan coba lagi.';
+            }
+        }
+        $stmt->close();
     }
 }
 ?>
@@ -32,7 +51,7 @@ if (isset($_POST['login'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Admin - CCTV Monitoring</title>
+    <title>Registrasi - CCTV Monitoring System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,7 +65,7 @@ if (isset($_POST['login'])) {
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -63,16 +82,16 @@ if (isset($_POST['login'])) {
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(102,126,234,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat center;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat center;
             background-size: cover;
         }
 
-        .login-container {
+        .register-container {
             max-width: 450px;
             width: 100%;
             background: white;
             border-radius: 25px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             overflow: hidden;
             position: relative;
             z-index: 1;
@@ -90,75 +109,37 @@ if (isset($_POST['login'])) {
             }
         }
 
-        .login-header {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
+        .register-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
             padding: 2.5rem 2rem;
             text-align: center;
             color: white;
-            position: relative;
-            overflow: hidden;
         }
 
-        .login-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(102,126,234,0.2) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .login-icon {
+        .register-icon {
             width: 70px;
             height: 70px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1rem;
             font-size: 2.2rem;
-            position: relative;
-            z-index: 1;
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
         }
 
-        .login-header h2 {
+        .register-header h2 {
             font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            position: relative;
-            z-index: 1;
         }
 
-        .login-header p {
+        .register-header p {
             font-size: 0.9rem;
             opacity: 0.9;
-            position: relative;
-            z-index: 1;
         }
 
-        .admin-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(102, 126, 234, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            margin-top: 1rem;
-            font-size: 0.85rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .login-body {
+        .register-body {
             padding: 2rem;
         }
 
@@ -187,9 +168,9 @@ if (isset($_POST['login'])) {
         }
 
         .alert-success {
-            background: #e8f5e9;
-            color: #2e7d32;
-            border-left: 4px solid #4caf50;
+            background: #efe;
+            color: #3c3;
+            border-left: 4px solid #3c3;
         }
 
         .form-group {
@@ -258,10 +239,10 @@ if (isset($_POST['login'])) {
             color: #667eea;
         }
 
-        .btn-login {
+        .btn-register {
             width: 100%;
             padding: 1rem;
-            background: linear-gradient(135deg, #1e293b, #0f172a);
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             border: none;
             border-radius: 12px;
@@ -274,16 +255,15 @@ if (isset($_POST['login'])) {
             justify-content: center;
             gap: 0.5rem;
             font-family: 'Poppins', sans-serif;
-            box-shadow: 0 4px 15px rgba(30, 41, 59, 0.3);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
 
-        .btn-login:hover {
+        .btn-register:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(30, 41, 59, 0.4);
-            background: linear-gradient(135deg, #0f172a, #1e293b);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
         }
 
-        .btn-login:active {
+        .btn-register:active {
             transform: translateY(0);
         }
 
@@ -307,20 +287,20 @@ if (isset($_POST['login'])) {
             padding: 0 1rem;
         }
 
-        .user-login {
+        .login-link {
             text-align: center;
             color: #64748b;
             font-size: 0.95rem;
         }
 
-        .user-login a {
+        .login-link a {
             color: #667eea;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
         }
 
-        .user-login a:hover {
+        .login-link a:hover {
             color: #764ba2;
             text-decoration: underline;
         }
@@ -344,48 +324,61 @@ if (isset($_POST['login'])) {
             color: #667eea;
         }
 
+        .password-strength {
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .strength-bar {
+            height: 4px;
+            background: #e2e8f0;
+            border-radius: 2px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .strength-fill {
+            height: 100%;
+            width: 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .strength-weak { width: 33%; background: #ef4444; }
+        .strength-medium { width: 66%; background: #f59e0b; }
+        .strength-strong { width: 100%; background: #10b981; }
+
         /* Responsive */
         @media (max-width: 768px) {
-            .login-container {
+            .register-container {
                 margin: 0 10px;
             }
 
-            .login-header {
+            .register-header {
                 padding: 2rem 1.5rem;
             }
 
-            .login-header h2 {
+            .register-header h2 {
                 font-size: 1.5rem;
             }
 
-            .login-body {
+            .register-body {
                 padding: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-header">
-            <div class="login-icon">
-                <i class="fas fa-user-shield"></i>
+    <div class="register-container">
+        <div class="register-header">
+            <div class="register-icon">
+                <i class="fas fa-user-plus"></i>
             </div>
-            <h2>Admin Login</h2>
-            <p>Panel Administrator CCTV Monitoring</p>
-            <div class="admin-badge">
-                <i class="fas fa-shield-alt"></i>
-                <span>Secure Access</span>
-            </div>
+            <h2>Buat Akun</h2>
+            <p>Daftar untuk mengakses sistem monitoring CCTV</p>
         </div>
 
-        <div class="login-body">
-            <?php if ($logoutMessage): ?>
-                <div class="alert alert-success">
-                    <i class="fas fa-check-circle"></i>
-                    <?= $logoutMessage ?>
-                </div>
-            <?php endif; ?>
-
+        <div class="register-body">
             <?php if ($error): ?>
                 <div class="alert alert-error">
                     <i class="fas fa-exclamation-circle"></i>
@@ -393,10 +386,17 @@ if (isset($_POST['login'])) {
                 </div>
             <?php endif; ?>
 
-            <form method="POST" action="">
+            <?php if ($success): ?>
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle"></i>
+                    <?= $success ?>
+                </div>
+            <?php endif; ?>
+
+            <form method="POST" action="" id="registerForm">
                 <div class="form-group">
                     <label for="username">
-                        <i class="fas fa-user"></i> Username Admin
+                        <i class="fas fa-user"></i> Username
                     </label>
                     <div class="input-wrapper">
                         <i class="fas fa-user"></i>
@@ -404,9 +404,9 @@ if (isset($_POST['login'])) {
                                class="form-control" 
                                id="username" 
                                name="username" 
-                               placeholder="Masukkan username admin"
-                               required 
-                               autofocus>
+                               placeholder="Pilih username"
+                               value="<?= isset($_POST['username']) ? htmlspecialchars($_POST['username']) : '' ?>"
+                               required>
                     </div>
                 </div>
 
@@ -420,24 +420,46 @@ if (isset($_POST['login'])) {
                                class="form-control" 
                                id="password" 
                                name="password" 
-                               placeholder="Masukkan password"
+                               placeholder="Minimal 6 karakter"
                                required>
                         <i class="fas fa-eye password-toggle" id="togglePassword"></i>
                     </div>
+                    <div class="password-strength">
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="strengthFill"></div>
+                        </div>
+                        <small id="strengthText"></small>
+                    </div>
                 </div>
 
-                <button type="submit" name="login" class="btn-login">
-                    <i class="fas fa-sign-in-alt"></i>
-                    Login sebagai Admin
+                <div class="form-group">
+                    <label for="confirm_password">
+                        <i class="fas fa-lock"></i> Konfirmasi Password
+                    </label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" 
+                               class="form-control" 
+                               id="confirm_password" 
+                               name="confirm_password" 
+                               placeholder="Ulangi password"
+                               required>
+                        <i class="fas fa-eye password-toggle" id="toggleConfirmPassword"></i>
+                    </div>
+                </div>
+
+                <button type="submit" name="register" class="btn-register">
+                    <i class="fas fa-user-plus"></i>
+                    Daftar Sekarang
                 </button>
 
                 <div class="divider">
                     <span>atau</span>
                 </div>
 
-                <!-- <div class="user-login">
-                    Login sebagai User? <a href="login_user.php">Klik di sini</a>
-                </div> -->
+                <div class="login-link">
+                    Sudah punya akun? <a href="login_user.php">Login di sini</a>
+                </div>
 
                 <div class="back-home">
                     <a href="home.php">
@@ -457,6 +479,62 @@ if (isset($_POST['login'])) {
             passwordInput.type = type;
             this.classList.toggle('fa-eye');
             this.classList.toggle('fa-eye-slash');
+        });
+
+        document.getElementById('toggleConfirmPassword').addEventListener('click', function() {
+            const confirmPasswordInput = document.getElementById('confirm_password');
+            const type = confirmPasswordInput.type === 'password' ? 'text' : 'password';
+            confirmPasswordInput.type = type;
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        // Password strength checker
+        document.getElementById('password').addEventListener('input', function() {
+            const password = this.value;
+            const strengthFill = document.getElementById('strengthFill');
+            const strengthText = document.getElementById('strengthText');
+            
+            let strength = 0;
+            if (password.length >= 6) strength++;
+            if (password.length >= 10) strength++;
+            if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+            if (/\d/.test(password)) strength++;
+            if (/[^a-zA-Z\d]/.test(password)) strength++;
+
+            strengthFill.className = 'strength-fill';
+            
+            if (strength <= 2) {
+                strengthFill.classList.add('strength-weak');
+                strengthText.textContent = 'Lemah';
+                strengthText.style.color = '#ef4444';
+            } else if (strength <= 4) {
+                strengthFill.classList.add('strength-medium');
+                strengthText.textContent = 'Sedang';
+                strengthText.style.color = '#f59e0b';
+            } else {
+                strengthFill.classList.add('strength-strong');
+                strengthText.textContent = 'Kuat';
+                strengthText.style.color = '#10b981';
+            }
+        });
+
+        // Form validation
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+
+            if (password !== confirmPassword) {
+                e.preventDefault();
+                alert('Password dan konfirmasi password tidak cocok!');
+                return false;
+            }
+
+            if (password.length < 6) {
+                e.preventDefault();
+                alert('Password minimal 6 karakter!');
+                return false;
+            }
         });
     </script>
 </body>

@@ -1,29 +1,42 @@
 <?php
+include 'koneksi.php';
 session_start();
+
+// Redirect jika sudah login
+if (isset($_SESSION['user_logged'])) {
+    header("Location: maps.php");
+    exit;
+}
+
+$error = '';
 $logoutMessage = '';
+
 if (isset($_GET['logout'])) {
     $logoutMessage = 'Anda telah berhasil logout.';
 }
-include 'koneksi.php';
-
-$error = '';
 
 if (isset($_POST['login'])) {
-    $user = $_POST['username'];
-    $pass = $_POST['password'];
+    $username = trim($_POST['username']);
+    $password = $_POST['password'];
 
-    $stmt = $conn->prepare("SELECT * FROM admin WHERE username = ? LIMIT 1");
-    $stmt->bind_param("s", $user);
-    $stmt->execute();
-    $result = $stmt->get_result()->fetch_assoc();
-
-    if ($result && hash('sha256', $pass) === $result['password']) {
-        $_SESSION['admin_logged'] = true;
-        $_SESSION['admin_name']   = $result['username'];
-        header("Location: dashboard.php");
-        exit;
+    if (empty($username) || empty($password)) {
+        $error = 'Username dan password harus diisi!';
     } else {
-        $error = 'Username / password salah';
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username = ? LIMIT 1");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+
+        if ($result && hash('sha256', $password) === $result['password']) {
+            $_SESSION['user_logged'] = true;
+            $_SESSION['user_id'] = $result['id'];
+            $_SESSION['username'] = $result['username'];
+            header("Location: maps.php");
+            exit;
+        } else {
+            $error = 'Username atau password salah!';
+        }
+        $stmt->close();
     }
 }
 ?>
@@ -32,7 +45,7 @@ if (isset($_POST['login'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Admin - CCTV Monitoring</title>
+    <title>Login User - CCTV Monitoring System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,7 +59,7 @@ if (isset($_POST['login'])) {
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -63,7 +76,7 @@ if (isset($_POST['login'])) {
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(102,126,234,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat center;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat center;
             background-size: cover;
         }
 
@@ -72,7 +85,7 @@ if (isset($_POST['login'])) {
             width: 100%;
             background: white;
             border-radius: 25px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             overflow: hidden;
             position: relative;
             z-index: 1;
@@ -91,71 +104,33 @@ if (isset($_POST['login'])) {
         }
 
         .login-header {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
+            background: linear-gradient(135deg, #667eea, #764ba2);
             padding: 2.5rem 2rem;
             text-align: center;
             color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .login-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(102,126,234,0.2) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
         }
 
         .login-icon {
             width: 70px;
             height: 70px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1rem;
             font-size: 2.2rem;
-            position: relative;
-            z-index: 1;
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
         }
 
         .login-header h2 {
             font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            position: relative;
-            z-index: 1;
         }
 
         .login-header p {
             font-size: 0.9rem;
             opacity: 0.9;
-            position: relative;
-            z-index: 1;
-        }
-
-        .admin-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(102, 126, 234, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            margin-top: 1rem;
-            font-size: 0.85rem;
-            position: relative;
-            z-index: 1;
         }
 
         .login-body {
@@ -258,10 +233,43 @@ if (isset($_POST['login'])) {
             color: #667eea;
         }
 
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            font-size: 0.9rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #64748b;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .forgot-password {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
         .btn-login {
             width: 100%;
             padding: 1rem;
-            background: linear-gradient(135deg, #1e293b, #0f172a);
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             border: none;
             border-radius: 12px;
@@ -274,13 +282,12 @@ if (isset($_POST['login'])) {
             justify-content: center;
             gap: 0.5rem;
             font-family: 'Poppins', sans-serif;
-            box-shadow: 0 4px 15px rgba(30, 41, 59, 0.3);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
 
         .btn-login:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(30, 41, 59, 0.4);
-            background: linear-gradient(135deg, #0f172a, #1e293b);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
         }
 
         .btn-login:active {
@@ -307,20 +314,20 @@ if (isset($_POST['login'])) {
             padding: 0 1rem;
         }
 
-        .user-login {
+        .register-link {
             text-align: center;
             color: #64748b;
             font-size: 0.95rem;
         }
 
-        .user-login a {
+        .register-link a {
             color: #667eea;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
         }
 
-        .user-login a:hover {
+        .register-link a:hover {
             color: #764ba2;
             text-decoration: underline;
         }
@@ -344,6 +351,24 @@ if (isset($_POST['login'])) {
             color: #667eea;
         }
 
+        .admin-login {
+            text-align: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .admin-login a {
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .admin-login a:hover {
+            color: #667eea;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .login-container {
@@ -361,6 +386,12 @@ if (isset($_POST['login'])) {
             .login-body {
                 padding: 1.5rem;
             }
+
+            .remember-forgot {
+                flex-direction: column;
+                gap: 0.75rem;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
@@ -368,14 +399,10 @@ if (isset($_POST['login'])) {
     <div class="login-container">
         <div class="login-header">
             <div class="login-icon">
-                <i class="fas fa-user-shield"></i>
+                <i class="fas fa-sign-in-alt"></i>
             </div>
-            <h2>Admin Login</h2>
-            <p>Panel Administrator CCTV Monitoring</p>
-            <div class="admin-badge">
-                <i class="fas fa-shield-alt"></i>
-                <span>Secure Access</span>
-            </div>
+            <h2>Selamat Datang</h2>
+            <p>Login untuk mengakses sistem monitoring CCTV</p>
         </div>
 
         <div class="login-body">
@@ -396,7 +423,7 @@ if (isset($_POST['login'])) {
             <form method="POST" action="">
                 <div class="form-group">
                     <label for="username">
-                        <i class="fas fa-user"></i> Username Admin
+                        <i class="fas fa-user"></i> Username
                     </label>
                     <div class="input-wrapper">
                         <i class="fas fa-user"></i>
@@ -404,7 +431,7 @@ if (isset($_POST['login'])) {
                                class="form-control" 
                                id="username" 
                                name="username" 
-                               placeholder="Masukkan username admin"
+                               placeholder="Masukkan username"
                                required 
                                autofocus>
                     </div>
@@ -428,16 +455,22 @@ if (isset($_POST['login'])) {
 
                 <button type="submit" name="login" class="btn-login">
                     <i class="fas fa-sign-in-alt"></i>
-                    Login sebagai Admin
+                    Login Sekarang
                 </button>
 
                 <div class="divider">
                     <span>atau</span>
                 </div>
 
-                <!-- <div class="user-login">
-                    Login sebagai User? <a href="login_user.php">Klik di sini</a>
-                </div> -->
+                <div class="register-link">
+                    Belum punya akun? <a href="register.php">Daftar di sini</a>
+                </div>
+
+                <div class="admin-login">
+                    <a href="login.php">
+                        <i class="fas fa-user-shield"></i> Login sebagai Admin
+                    </a>
+                </div>
 
                 <div class="back-home">
                     <a href="home.php">

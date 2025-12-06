@@ -1,12 +1,4 @@
 <?php
-// session_start();
-
-// // Cek apakah user sudah login
-// if (!isset($_SESSION['user_logged'])) {
-//     header("Location: login_user.php");
-//     exit;
-// }
-
 // API Key YouTube
 $apiKey = 'AIzaSyAPnGJS6r5Q2H_235Szh3bxPrQBmvckM8k';
 
@@ -139,42 +131,14 @@ if (!$activeCCTV) {
             color: #7f8c8d;
         }
 
-        .user-section {
+        .nav-links {
             display: flex;
-            align-items: center;
             gap: 1rem;
         }
 
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.5rem 1rem;
-            background: #f8f9fa;
-            border-radius: 25px;
-        }
-
-        .user-avatar {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-        }
-
-        .user-name {
-            color: #1e293b;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        .btn-logout {
+        .nav-btn {
             padding: 0.75rem 1.5rem;
-            background: linear-gradient(135deg, #ef4444, #dc2626);
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             border: none;
             border-radius: 25px;
@@ -185,12 +149,11 @@ if (!$activeCCTV) {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            font-family: 'Poppins', sans-serif;
         }
 
-        .btn-logout:hover {
+        .nav-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
         /* Container Utama */
@@ -561,7 +524,7 @@ if (!$activeCCTV) {
             width: 100%;
         }
 
-        /* Footer */
+       /* Footer */
     .footer {
         padding: 2rem 40px;
         background: #1e293b;
@@ -706,11 +669,6 @@ if (!$activeCCTV) {
             .list-container ul {
                 grid-template-columns: 1fr;
             }
-
-            .user-section {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
         }
     </style>
 </head>
@@ -727,15 +685,10 @@ if (!$activeCCTV) {
                     <p>Kabupaten Rembang</p>
                 </div>
             </div>
-            <div class="user-section">
-                <!-- <div class="user-info">
-                    <div class="user-avatar">
-                        <?= strtoupper(substr($_SESSION['username'], 0, 1)) ?>
-                    </div>
-                    <span class="user-name"><?= htmlspecialchars($_SESSION['username']) ?></span>
-                </div> -->
-                <a href="home.php" class="btn-logout">
-                    <i class="fas fa-sign-out-alt"></i> Home
+            <div class="nav-links">
+                <a href="dashboard.php" class="nav-btn">
+                    <i class="fas fa-chart-line"></i>
+                    Dashboard
                 </a>
             </div>
         </div>
@@ -799,7 +752,6 @@ if (!$activeCCTV) {
                         <?= strtoupper($activeCCTV['status']) ?>
                     </div>
                 </div>
-                <script src="overlay_yolo.js"></script>
                 <div class="video-container">
                     <iframe 
                         src="https://www.youtube.com/embed/<?= htmlspecialchars($activeCCTV['video_id']) ?>?autoplay=1&mute=1" 

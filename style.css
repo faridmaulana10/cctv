@@ -4,7 +4,7 @@
 
 
         /* maps.php */
-        body { margin: 0; font-family: "Segoe UI", sans-serif; background-color:rgb(222, 234, 255); }
+        /* body { margin: 0; font-family: "Segoe UI", sans-serif; background-color:rgb(222, 234, 255); }
         header, footer {
             background: rgb(177, 93, 255);
             color: white;
@@ -85,7 +85,7 @@
         .popup-btn:hover {
             background: linear-gradient(135deg, #e0e0e0, #c0c0c0);
             transform: scale(1.05);
-        }
+        } */
         /* end */
 
         
