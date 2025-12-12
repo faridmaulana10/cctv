@@ -1,0 +1,34 @@
+2025-12-12 06:51:47 - Request received
+POST data: Array
+(
+)
+
+2025-12-12 06:55:44 - Request received
+POST data: Array
+(
+    [cctv_id] => 1
+    [cctv_name] => CCTV 1 - Taman Lasem
+    [reporter_name] => wahid
+    [report_text] => error
+)
+
+2025-12-12 06:55:54 - Request received
+POST data: Array
+(
+    [cctv_id] => 1
+    [cctv_name] => CCTV 1 - Taman Lasem
+    [reporter_name] => wahid
+    [report_text] => cctv error min
+)
+
+Success - Report ID: 3
+2025-12-12 12:54:56 - Request received
+POST data: Array
+(
+    [cctv_id] => 2
+    [cctv_name] => CCTV 1 - Celangapan
+    [reporter_name] => rizal
+    [report_text] => ada penampakan furina
+)
+
+Success - Report ID: 4

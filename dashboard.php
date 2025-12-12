@@ -125,8 +125,6 @@ unset($d);
         height: 80px;
         margin: 0 auto 15px;
         display: block;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     .sidebar a { 
@@ -682,12 +680,13 @@ unset($d);
     <a href="dashboard.php"><i class="fa fa-chart-line"></i> Dashboard</a>
     <a href="maps_preview_admin.php"><i class="fa fa-map"></i> User Preview</a>
     <a href="list.php"><i class="fa fa-video"></i> Data CCTV</a>
+    <a href="reports.php" class="active"><i class="fa fa-exclamation-triangle"></i> Laporan</a>
 
     <hr>
-    <h3>STATISTIK</h3>
+    <!-- <h3>STATISTIK</h3>
     <a><i class="fa fa-camera"></i> Jumlah CCTV <strong><?= $totalCCTV ?></strong></a>
     <a><i class="fa fa-circle" style="color:#10b981;"></i> Online <strong><?= $online ?></strong></a>
-    <a><i class="fa fa-circle" style="color:#ef4444;"></i> Offline <strong><?= $offline ?></strong></a>
+    <a><i class="fa fa-circle" style="color:#ef4444;"></i> Offline <strong><?= $offline ?></strong></a> -->
 
     <!-- Tombol Logout -->
     <a href="logout.php" class="logout-btn" onclick="return confirm('Yakin ingin logout?');">

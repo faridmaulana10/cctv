@@ -626,9 +626,14 @@ if (!$activeCCTV) {
                     <p>Kabupaten Rembang</p>
                 </div>
             </div>
-            <a href="home.php" class="nav-btn">
-                <i class="fas fa-home"></i> Home
-            </a>
+            <div class="user-section">
+                <a href="check_reports.php" class="nav-btn" style="background: linear-gradient(135deg, #10b981, #059669); margin-right: 1rem;">
+                    <i class="fas fa-clipboard-check"></i> Cek Status Laporan
+                </a>
+                <a href="home.php" class="nav-btn">
+                    <i class="fas fa-home"></i> Home
+                </a>
+            </div>
         </div>
     </header>
 
@@ -723,7 +728,7 @@ if (!$activeCCTV) {
                                       required></textarea>
                             <small style="color: #64748b; margin-top: 0.25rem; display: block;">
                                 <i class="fas fa-info-circle"></i> 
-                                Contoh: "CCTV tidak berfungsi", "Ada vandalisme", dll.
+                                Contoh: "CCTV tidak berfungsi", "Gambar buram", "Ada vandalisme", dll.
                             </small>
                         </div>
 
@@ -886,6 +891,8 @@ if (!$activeCCTV) {
         document.getElementById('reportForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
+            console.log('Form submitted'); // Debug
+            
             const submitBtn = this.querySelector('button[type="submit"]');
             const alertDiv = document.getElementById('reportAlert');
             
@@ -896,13 +903,31 @@ if (!$activeCCTV) {
             // Get form data
             const formData = new FormData(this);
             
+            // Debug: Log form data
+            console.log('Form data:');
+            for (let pair of formData.entries()) {
+                console.log(pair[0] + ': ' + pair[1]);
+            }
+            
             try {
                 const response = await fetch('submit_report.php', {
                     method: 'POST',
                     body: formData
                 });
                 
+                console.log('Response status:', response.status); // Debug
+                
+                const contentType = response.headers.get('content-type');
+                console.log('Content-Type:', contentType); // Debug
+                
+                if (!contentType || !contentType.includes('application/json')) {
+                    const text = await response.text();
+                    console.error('Non-JSON response:', text);
+                    throw new Error('Server tidak mengembalikan JSON. Response: ' + text.substring(0, 200));
+                }
+                
                 const result = await response.json();
+                console.log('Result:', result); // Debug
                 
                 if (result.success) {
                     // Show success message
@@ -916,10 +941,13 @@ if (!$activeCCTV) {
                     // Reset form
                     this.reset();
                     
-                    // Remove alert after 5 seconds
+                    // Scroll to alert
+                    alertDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    
+                    // Remove alert after 7 seconds
                     setTimeout(() => {
                         alertDiv.innerHTML = '';
-                    }, 5000);
+                    }, 7000);
                 } else {
                     // Show error message
                     alertDiv.innerHTML = `
@@ -929,23 +957,29 @@ if (!$activeCCTV) {
                         </div>
                     `;
                     
-                    // Remove alert after 5 seconds
+                    // Scroll to alert
+                    alertDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    
+                    // Remove alert after 7 seconds
                     setTimeout(() => {
                         alertDiv.innerHTML = '';
-                    }, 5000);
+                    }, 7000);
                 }
             } catch (error) {
                 console.error('Error:', error);
                 alertDiv.innerHTML = `
                     <div class="alert alert-error">
                         <i class="fas fa-times-circle"></i>
-                        Terjadi kesalahan. Silakan coba lagi.
+                        Terjadi kesalahan: ${error.message}
                     </div>
                 `;
                 
+                // Scroll to alert
+                alertDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                
                 setTimeout(() => {
                     alertDiv.innerHTML = '';
-                }, 5000);
+                }, 7000);
             } finally {
                 // Re-enable button
                 submitBtn.disabled = false;

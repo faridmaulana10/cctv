@@ -158,7 +158,6 @@ $count_total = $count_pending + $count_reviewed + $count_resolved;
         }
 
         .sidebar > h2 {
-            text-align: center;
             padding: 0 20px 20px;
             border-bottom: 2px solid rgba(255, 255, 255, 0.1);
             margin: 0 0 20px 0;
@@ -171,9 +170,7 @@ $count_total = $count_pending + $count_reviewed + $count_resolved;
             width: 80px;
             height: 80px;
             margin: 0 auto 15px;
-            display: block;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            display: block;;
         }
 
         .sidebar a {
@@ -196,11 +193,11 @@ $count_total = $count_pending + $count_reviewed + $count_resolved;
             padding-left: 25px;
         }
 
-        .sidebar a.active {
+        /* .sidebar a.active {
             background: rgba(255, 255, 255, 0.15);
             color: white;
             border-left-color: #667eea;
-        }
+        } */
 
         .sidebar a i {
             width: 20px;
@@ -566,16 +563,16 @@ $count_total = $count_pending + $count_reviewed + $count_resolved;
     <h2>📡 CCTV PANEL</h2>
 
     <a href="dashboard.php"><i class="fa fa-chart-line"></i> Dashboard</a>
-    <a href="maps_preview_admin.php"><i class="fa fa-map"></i> Peta CCTV</a>
+    <a href="maps_preview_admin.php"><i class="fa fa-map"></i> User Preview</a>
     <a href="list.php"><i class="fa fa-video"></i> Data CCTV</a>
     <a href="reports.php" class="active"><i class="fa fa-exclamation-triangle"></i> Laporan</a>
 
     <hr>
-    <h3>STATISTIK LAPORAN</h3>
+    <!-- <h3>STATISTIK LAPORAN</h3>
     <a><i class="fa fa-file-alt"></i> Total <strong><?= $count_total ?></strong></a>
     <a><i class="fa fa-clock" style="color:#f59e0b;"></i> Pending <strong><?= $count_pending ?></strong></a>
     <a><i class="fa fa-eye" style="color:#3b82f6;"></i> Ditinjau <strong><?= $count_reviewed ?></strong></a>
-    <a><i class="fa fa-check-circle" style="color:#10b981;"></i> Selesai <strong><?= $count_resolved ?></strong></a>
+    <a><i class="fa fa-check-circle" style="color:#10b981;"></i> Selesai <strong><?= $count_resolved ?></strong></a> -->
 
     <a href="logout.php" class="logout-btn" onclick="return confirm('Yakin ingin logout?');">
         <i class="fa fa-sign-out-alt"></i> Logout
