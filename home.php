@@ -680,7 +680,7 @@
     </section>
 
     <!-- Footer -->
-<footer class="footer">
+<footer class="footer" id="contact">
     <div class="footer-content">
         <div class="footer-section">
             <!-- Logo Footer -->
@@ -694,10 +694,10 @@
                 Memantau keamanan dan lalu lintas kota secara real-time dengan teknologi terkini.
             </p>
             <div class="social-links">
-                <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
-                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" title="Lokasi"><i class="fas fa-map-marker-alt"></i></a>
+                <a href="https://www.facebook.com/ghost" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.tiktok.com/@rembangkab" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.instagram.com/rembangkab" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://maps.app.goo.gl/EC8tH7vLzesceoes9" title="Lokasi"><i class="fas fa-map-marker-alt"></i></a>
             </div>
         </div>
 

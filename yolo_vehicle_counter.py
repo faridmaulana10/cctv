@@ -11,8 +11,8 @@ model = YOLO("yolov8n.pt")
 # === Label kendaraan yang ingin dihitung ===
 VEHICLE_LABELS = ["car", "motorbike", "bus", "truck"]
 
-# === File hasil ===
-OUTPUT_FILE = "vehicle_accuracy.json"
+# # === File hasil ===
+# OUTPUT_FILE = "vehicle_accuracy.json"
 
 
 def get_youtube_stream_url(video_id):

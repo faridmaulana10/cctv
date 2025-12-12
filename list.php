@@ -100,16 +100,23 @@ function cekStatusYoutube($videoId, $apiKey)
         }
 
         .sidebar > h2 {
-            padding: 0 20px 20px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-            margin: 0 0 20px 0;
-            font-size: 1.3rem;
-            font-weight: 700;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        text-align: left;
+        padding: 0 20px 20px;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        margin: 0 0 20px 0;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: white;
         }
+
+        .sidebar-logo {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 15px;
+        display: block;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
 
         .sidebar a {
             font-family: "Poppins", sans-serif;
@@ -553,6 +560,8 @@ function cekStatusYoutube($videoId, $apiKey)
 <body>
 
 <div class="sidebar">
+    <!-- Logo -->
+    <img src="uploads/logo.png" alt="Logo CCTV" class="sidebar-logo" onerror="this.style.display='none'">
     <h2>📡 CCTV PANEL</h2>
 
     <a href="dashboard.php"><i class="fa fa-chart-line"></i> Dashboard</a>
@@ -671,10 +680,10 @@ function cekStatusYoutube($videoId, $apiKey)
                 Memantau keamanan dan lalu lintas kota secara real-time dengan teknologi terkini.
             </p>
             <div class="social-links">
-                <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
-                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="#" title="Lokasi"><i class="fas fa-map-marker-alt"></i></a>
+                <a href="https://www.facebook.com/ghost" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.tiktok.com/@rembangkab" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.instagram.com/rembangkab" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://maps.app.goo.gl/EC8tH7vLzesceoes9" title="Lokasi"><i class="fas fa-map-marker-alt"></i></a>
             </div>
         </div>
 
