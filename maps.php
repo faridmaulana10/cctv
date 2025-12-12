@@ -1,12 +1,4 @@
 <?php
-// session_start();
-
-// // Cek apakah user sudah login
-// if (!isset($_SESSION['user_logged'])) {
-//     header("Location: login_user.php");
-//     exit;
-// }
-
 // API Key YouTube
 $apiKey = 'AIzaSyAPnGJS6r5Q2H_235Szh3bxPrQBmvckM8k';
 
@@ -139,40 +131,7 @@ if (!$activeCCTV) {
             color: #7f8c8d;
         }
 
-        .user-section {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.5rem 1rem;
-            background: #f8f9fa;
-            border-radius: 25px;
-        }
-
-        .user-avatar {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-        }
-
-        .user-name {
-            color: #1e293b;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        .btn-logout {
+        .nav-btn {
             padding: 0.75rem 1.5rem;
             background: linear-gradient(135deg, #ef4444, #dc2626);
             color: white;
@@ -180,15 +139,14 @@ if (!$activeCCTV) {
             border-radius: 25px;
             cursor: pointer;
             font-weight: 600;
-            transition: all 0.3s ease;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
         }
 
-        .btn-logout:hover {
+        .nav-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
         }
@@ -261,164 +219,6 @@ if (!$activeCCTV) {
             font-size: 1rem;
         }
 
-        /* List Container */
-        .list-container {
-            display: none;
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
-            max-height: 400px;
-            overflow-y: auto;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .list-container.active {
-            display: block;
-            animation: slideDown 0.3s ease;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .list-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e2e8f0;
-        }
-
-        .list-header h3 {
-            margin: 0;
-            color: #1e293b;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .close-btn {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .close-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.3);
-        }
-
-        .list-container ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 15px;
-        }
-
-        .list-container li {
-            padding: 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .list-container li:hover {
-            border-color: #667eea;
-            background: linear-gradient(135deg, #667eea05, #764ba205);
-            transform: translateX(5px);
-        }
-
-        .list-container li i {
-            font-size: 1.5rem;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-        }
-
-        .list-container li.online i {
-            background: linear-gradient(135deg, #10b981, #059669);
-        }
-
-        .list-container li.offline i {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-        }
-
-        .list-item-content {
-            flex: 1;
-        }
-
-        .list-item-content strong {
-            display: block;
-            color: #1e293b;
-            font-size: 1rem;
-            margin-bottom: 4px;
-        }
-
-        .list-item-content small {
-            color: #64748b;
-            font-size: 0.85rem;
-        }
-
-        .list-container li a {
-            color: white;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            padding: 8px 16px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-
-        .list-container li a:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-        }
-
-        .list-container::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .list-container::-webkit-scrollbar-track {
-            background: #f1f5f9;
-            border-radius: 10px;
-        }
-
-        .list-container::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 10px;
-        }
-
         /* Main Content Grid */
         .main-grid {
             display: grid;
@@ -427,7 +227,7 @@ if (!$activeCCTV) {
             margin-bottom: 2rem;
         }
 
-        /* Video Player */
+        /* Video Section */
         .video-section {
             background: white;
             border-radius: 20px;
@@ -475,6 +275,125 @@ if (!$activeCCTV) {
             left: 0;
             width: 100%;
             height: 100%;
+        }
+
+        /* Report Section */
+        .report-section {
+            padding: 2rem;
+            background: #f8f9fa;
+        }
+
+        .report-section h3 {
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .report-section h3 i {
+            color: #ef4444;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-group label i {
+            margin-right: 0.5rem;
+            color: #667eea;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-submit-report {
+            width: 100%;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-submit-report:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+        }
+
+        .btn-submit-report:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert-success {
+            background: #d1fae5;
+            color: #065f46;
+            border-left: 4px solid #10b981;
+        }
+
+        .alert-error {
+            background: #fee2e2;
+            color: #991b1b;
+            border-left: 4px solid #ef4444;
         }
 
         /* Sidebar CCTV List */
@@ -562,121 +481,99 @@ if (!$activeCCTV) {
         }
 
         /* Footer */
-    .footer {
-        padding: 2rem 40px;
-        background: #1e293b;
-    }
-
-    .footer-content {
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr;
-        gap: 3rem;
-        max-width: 1400px;
-        margin: 0 auto 2rem;
-    }
-
-    .footer-section h3 {
-        color: rgba(255, 255, 255, 0.7);
-        font-size: 1.1rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .footer-section h3 i {
-        color: #667eea;
-    }
-
-    .footer-section p {
-        color: rgba(255, 255, 255, 0.7);
-        line-height: 1.8;
-        font-size: 0.9rem;
-    }
-
-    .footer-links {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .footer-links li {
-        margin-bottom: 0.75rem;
-    }
-
-    .footer-links a {
-        color: rgba(255, 255, 255, 0.7);
-        text-decoration: none;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 0.9rem;
-    }
-
-    .footer-links a:hover {
-        color: #667eea;
-        padding-left: 5px;
-    }
-
-    .footer-links a i {
-        font-size: 0.8rem;
-    }
-
-    .social-links {
-        display: flex;
-        gap: 1rem;
-        margin-top: 1rem;
-    }
-
-    .social-links a {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        transition: all 0.3s ease;
-        text-decoration: none;
-    }
-
-    .social-links a:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-    }
-
-    .footer-bottom {
-        text-align: center;
-        padding-top: 2rem;
-        border-top: 1px solid #e2e8f0;
-        color: #64748b;
-        font-size: 0.9rem;
-    }
-
-    .footer-bottom strong {
-        color: #667eea;
-    }
-
-    @media (max-width: 1024px) {
         .footer {
-            margin-left: 250px;
+            padding: 2rem 40px;
+            background: #1e293b;
         }
 
         .footer-content {
-            grid-template-columns: 1fr;
-            gap: 2rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto 2rem;
         }
-    }
 
-    @media (max-width: 768px) {
-        .footer {
-            margin-left: 0;
-            padding: 2rem 20px;
+        .footer-section h3 {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-    }
+
+        .footer-section h3 i {
+            color: #667eea;
+        }
+
+        .footer-section p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: #667eea;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom strong {
+            color: #667eea;
+        }
 
         /* Scrollbar */
         .cctv-sidebar::-webkit-scrollbar {
@@ -703,13 +600,15 @@ if (!$activeCCTV) {
                 grid-template-columns: 1fr;
             }
 
-            .list-container ul {
+            .footer-content {
                 grid-template-columns: 1fr;
+                gap: 2rem;
             }
+        }
 
-            .user-section {
-                flex-direction: column;
-                gap: 0.5rem;
+        @media (max-width: 768px) {
+            .footer {
+                padding: 2rem 20px;
             }
         }
     </style>
@@ -727,17 +626,9 @@ if (!$activeCCTV) {
                     <p>Kabupaten Rembang</p>
                 </div>
             </div>
-            <div class="user-section">
-                <!-- <div class="user-info">
-                    <div class="user-avatar">
-                        <?= strtoupper(substr($_SESSION['username'], 0, 1)) ?>
-                    </div>
-                    <span class="user-name"><?= htmlspecialchars($_SESSION['username']) ?></span>
-                </div> -->
-                <a href="home.php" class="btn-logout">
-                    <i class="fas fa-sign-out-alt"></i> Home
-                </a>
-            </div>
+            <a href="home.php" class="nav-btn">
+                <i class="fas fa-home"></i> Home
+            </a>
         </div>
     </header>
 
@@ -754,7 +645,7 @@ if (!$activeCCTV) {
                     <p>Total CCTV</p>
                 </div>
             </div>
-            <div class="stat-card" id="cardOnline">
+            <div class="stat-card">
                 <div class="stat-icon online">
                     <i class="fas fa-check-circle"></i>
                 </div>
@@ -763,7 +654,7 @@ if (!$activeCCTV) {
                     <p>CCTV Online</p>
                 </div>
             </div>
-            <div class="stat-card" id="cardOffline">
+            <div class="stat-card">
                 <div class="stat-icon offline">
                     <i class="fas fa-times-circle"></i>
                 </div>
@@ -772,17 +663,6 @@ if (!$activeCCTV) {
                     <p>CCTV Offline</p>
                 </div>
             </div>
-        </div>
-
-        <!-- List Container -->
-        <div class="list-container" id="listContainer">
-            <div class="list-header">
-                <h3 id="listTitle"><i class="fas fa-list"></i> Daftar CCTV</h3>
-                <button class="close-btn" onclick="hideList()">
-                    <i class="fas fa-times"></i> Tutup
-                </button>
-            </div>
-            <ul id="listContent"></ul>
         </div>
 
         <!-- Main Grid -->
@@ -799,13 +679,59 @@ if (!$activeCCTV) {
                         <?= strtoupper($activeCCTV['status']) ?>
                     </div>
                 </div>
-                <script src="overlay_yolo.js"></script>
                 <div class="video-container">
                     <iframe 
                         src="https://www.youtube.com/embed/<?= htmlspecialchars($activeCCTV['video_id']) ?>?autoplay=1&mute=1" 
                         allow="autoplay; encrypted-media" 
                         allowfullscreen>
                     </iframe>
+                </div>
+
+                <!-- Report Section -->
+                <div class="report-section">
+                    <h3>
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Laporkan Masalah
+                    </h3>
+                    
+                    <div id="reportAlert"></div>
+
+                    <form id="reportForm">
+                        <input type="hidden" name="cctv_id" value="<?= $activeCCTV['id'] ?>">
+                        <input type="hidden" name="cctv_name" value="<?= htmlspecialchars($activeCCTV['nama']) ?>">
+                        
+                        <div class="form-group">
+                            <label>
+                                <i class="fas fa-user"></i> Nama Pelapor <span style="color: #ef4444;">*</span>
+                            </label>
+                            <input type="text" 
+                                   name="reporter_name" 
+                                   class="form-control" 
+                                   placeholder="Masukkan nama Anda"
+                                   maxlength="100"
+                                   required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                <i class="fas fa-comment-alt"></i> Isi Laporan <span style="color: #ef4444;">*</span>
+                            </label>
+                            <textarea name="report_text" 
+                                      class="form-control" 
+                                      placeholder="Jelaskan masalah yang Anda temukan (min. 10 karakter, max. 1000 karakter)"
+                                      maxlength="1000"
+                                      required></textarea>
+                            <small style="color: #64748b; margin-top: 0.25rem; display: block;">
+                                <i class="fas fa-info-circle"></i> 
+                                Contoh: "CCTV tidak berfungsi", "Ada vandalisme", dll.
+                            </small>
+                        </div>
+
+                        <button type="submit" class="btn-submit-report">
+                            <i class="fas fa-paper-plane"></i>
+                            Kirim Laporan
+                        </button>
+                    </form>
                 </div>
             </div>
 
@@ -838,110 +764,67 @@ if (!$activeCCTV) {
     </div>
 
     <!-- Footer -->
-<footer class="footer">
-    <div class="footer-content">
-        <div class="footer-section">
-            <!-- Logo Footer -->
-            <!-- <img src="uploads/logo.png" alt="Logo CCTV" class="footer-logo" onerror="this.style.display='none'"> -->
-            <h3>
-                <i class="fas fa-video"></i>
-                CCTV Monitoring System
-            </h3>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>
+                    <i class="fas fa-video"></i>
+                    CCTV Monitoring System
+                </h3>
+                <p>
+                    Sistem monitoring CCTV modern untuk Kabupaten Rembang. 
+                    Memantau keamanan dan lalu lintas kota secara real-time dengan teknologi terkini.
+                </p>
+                <div class="social-links">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="Lokasi"><i class="fas fa-map-marker-alt"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>
+                    <i class="fas fa-clock"></i>
+                    Waktu Pelayanan
+                </h3>
+                <div class="schedule-item">
+                    <p><span class="schedule-day">Senin - Kamis</span>
+                    <span class="schedule-time">07:30 - 16:00</span></p>
+                </div>
+                <div class="schedule-item">
+                    <p><span class="schedule-day">Jumat</span>
+                    <span class="schedule-time">07:30 - 11:00</span></p>
+                </div>
+                <div class="schedule-item">
+                    <p><span class="schedule-day">Sabtu - Minggu</span>
+                    <span class="schedule-closed">LIBUR</span></p>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>
+                    <i class="fas fa-info-circle"></i>
+                    Informasi
+                </h3>
+                <ul class="footer-links">
+                    <li><a href="https://dinkominfo.rembangkab.go.id"><i class="fas fa-chevron-right"></i> Tentang Kami</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
             <p>
-                Sistem monitoring CCTV modern untuk Kabupaten Rembang. 
-                Memantau keamanan dan lalu lintas kota secara real-time dengan teknologi terkini.
+                &copy; <?= date('Y') ?> <strong>CCTV Monitoring System</strong> - Kabupaten Rembang. 
+                All Rights Reserved. Made with <i class="fas fa-heart" style="color: #ef4444;"></i> by Tim Pengembang
             </p>
-            <div class="social-links">
-                <a href="https://www.facebook.com/ghost" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.tiktok.com/@rembangkab" title="TikTok"><i class="fab fa-tiktok"></i></a>
-                <a href="https://www.instagram.com/rembangkab" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://maps.app.goo.gl/EC8tH7vLzesceoes9" title="Lokasi"><i class="fas fa-map-marker-alt"></i></a>
-            </div>
         </div>
-
-        <div class="footer-section">
-            <h3>
-                <i class="fas fa-clock"></i>
-                Waktu Pelayanan
-            </h3>
-            <div class="schedule-item">
-                <p><span class="schedule-day">Senin - Kamis</span>
-                <span class="schedule-time">07:30 - 16:00</span></p>
-            </div>
-            <div class="schedule-item">
-                <p><span class="schedule-day">Jumat</span>
-                <span class="schedule-time">07:30 - 11:00</span></p>
-            </div>
-            <div class="schedule-item">
-                <p><span class="schedule-day">Sabtu - Minggu</span>
-                <span class="schedule-closed">LIBUR</span></p>
-            </div>
-        </div>
-
-        <div class="footer-section">
-            <h3>
-                <i class="fas fa-info-circle"></i>
-                Informasi
-            </h3>
-            <ul class="footer-links">
-                <li><a href="https://dinkominfo.rembangkab.go.id"><i class="fas fa-chevron-right"></i> Tentang Kami</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="footer-bottom">
-        <p>
-            &copy; <?= date('Y') ?> <strong>CCTV Monitoring System</strong> - Kabupaten Rembang. 
-            All Rights Reserved. Made with <i class="fas fa-heart" style="color: #ef4444;"></i> by Tim Pengembang
-        </p>
-    </div>
-</footer>
+    </footer>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
         // Data CCTV dari PHP
         const cctvList = <?= json_encode($cctvList) ?>;
-
-        // Event listener untuk card Online
-        document.getElementById('cardOnline').addEventListener('click', () => showList('online'));
-
-        // Event listener untuk card Offline
-        document.getElementById('cardOffline').addEventListener('click', () => showList('offline'));
-
-        function showList(status) {
-            const listContainer = document.getElementById('listContainer');
-            const listContent = document.getElementById('listContent');
-            const listTitle = document.getElementById('listTitle');
-            const filtered = cctvList.filter(c => c.status === status);
-
-            const titleText = status === 'online' ? 'Daftar CCTV Online 🟢' : 'Daftar CCTV Offline 🔴';
-            listTitle.innerHTML = `<i class="fas fa-list"></i> ${titleText}`;
-
-            let html = '';
-            filtered.forEach(cctv => {
-                html += `<li class="${status}">
-                    <div class="list-item-content">
-                        <strong>${cctv.nama}</strong>
-                        <small>${cctv.alamat}</small>
-                    </div>
-                    <a href="?id=${cctv.id}">Lihat</a>
-                </li>`;
-            });
-
-            if (filtered.length === 0) {
-                html = '<p style="text-align: center; color: #64748b; padding: 20px;">Tidak ada CCTV ' + (status === 'online' ? 'online' : 'offline') + '</p>';
-            }
-
-            listContent.innerHTML = html;
-            listContainer.classList.add('active');
-            
-            // Scroll to list
-            listContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-
-        function hideList() {
-            document.getElementById('listContainer').classList.remove('active');
-        }
 
         // Initialize Map
         const map = L.map('map').setView([-6.71, 111.39], 13);
@@ -998,6 +881,77 @@ if (!$activeCCTV) {
         if (activeCCTV) {
             map.setView([parseFloat(activeCCTV.lat), parseFloat(activeCCTV.lng)], 15);
         }
+
+        // Handle Report Form Submission
+        document.getElementById('reportForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const alertDiv = document.getElementById('reportAlert');
+            
+            // Disable button
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
+            
+            // Get form data
+            const formData = new FormData(this);
+            
+            try {
+                const response = await fetch('submit_report.php', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Show success message
+                    alertDiv.innerHTML = `
+                        <div class="alert alert-success">
+                            <i class="fas fa-check-circle"></i>
+                            ${result.message}
+                        </div>
+                    `;
+                    
+                    // Reset form
+                    this.reset();
+                    
+                    // Remove alert after 5 seconds
+                    setTimeout(() => {
+                        alertDiv.innerHTML = '';
+                    }, 5000);
+                } else {
+                    // Show error message
+                    alertDiv.innerHTML = `
+                        <div class="alert alert-error">
+                            <i class="fas fa-times-circle"></i>
+                            ${result.message}
+                        </div>
+                    `;
+                    
+                    // Remove alert after 5 seconds
+                    setTimeout(() => {
+                        alertDiv.innerHTML = '';
+                    }, 5000);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alertDiv.innerHTML = `
+                    <div class="alert alert-error">
+                        <i class="fas fa-times-circle"></i>
+                        Terjadi kesalahan. Silakan coba lagi.
+                    </div>
+                `;
+                
+                setTimeout(() => {
+                    alertDiv.innerHTML = '';
+                }, 5000);
+            } finally {
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Kirim Laporan';
+            }
+        });
     </script>
 </body>
 </html>

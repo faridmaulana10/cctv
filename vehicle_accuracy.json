@@ -54,5 +54,24 @@
             "bus": 0.554,
             "truck": 0.525
         }
+    },
+    "2025-12-12": {
+        "CCTV 1 - Celangapan": {
+            "video_id": "3sTPp40WU_w",
+            "processed_frames": 250,
+            "average_confidence": {
+                "car": 0.689,
+                "motorbike": 0.347,
+                "bus": 0.622,
+                "truck": 0.757
+            },
+            "detection_counts": {
+                "car": 87,
+                "motorbike": 114,
+                "bus": 4,
+                "truck": 405
+            },
+            "timestamp": "2025-12-12T07:15:53.380949"
+        }
     }
 }

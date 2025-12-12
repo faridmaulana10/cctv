@@ -639,13 +639,13 @@
                 <h3>Dashboard Analytics</h3>
                 <p>Analisis data dan statistik lengkap dengan visualisasi yang mudah dipahami.</p>
             </div>
-            <div class="feature-card">
+            <!-- <div class="feature-card">
                 <div class="feature-icon">
                     <i class="fas fa-car"></i>
                 </div>
                 <h3>Deteksi Kendaraan</h3>
                 <p>Sistem otomatis mendeteksi kendaraan yang melintas.</p>
-            </div>
+            </div> -->
             <div class="feature-card">
                 <div class="feature-icon">
                     <i class="fas fa-mobile-alt"></i>

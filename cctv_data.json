@@ -34,5 +34,14 @@
         "alamat": "Galonan Rembang",
         "lat": "-6.732886",
         "lng": "111.353908"
+    },
+    {
+        "id": 8,
+        "nama": "CCTV 1 - Terminal Rembang",
+        "video_id": "hiYwY6dns7Y",
+        "thumbnail": "uploads\/terminal_rbg1.jpg",
+        "alamat": "Pandean",
+        "lat": "-6.704898",
+        "lng": "111.348161"
     }
 ]
