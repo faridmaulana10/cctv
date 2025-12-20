@@ -43,5 +43,32 @@
         "alamat": "Pandean",
         "lat": "-6.704898",
         "lng": "111.348161"
+    },
+    {
+        "id": 9,
+        "nama": "CCTV 1 - Tugu Adipura Rembang",
+        "video_id": "LCuX8-p9kZc",
+        "thumbnail": "uploads\/tugu_adipura1.jpg",
+        "alamat": "Kutoharjo",
+        "lat": "-6.704252",
+        "lng": "111.342085"
+    },
+    {
+        "id": 10,
+        "nama": "CCTV 2 - Tugu Adipura Rembang",
+        "video_id": "CQmDKl5GoqA",
+        "thumbnail": "uploads\/tugu_adipura2.jpg",
+        "alamat": "Kutoharjo",
+        "lat": "-6.704252",
+        "lng": "111.342085"
+    },
+    {
+        "id": 11,
+        "nama": "CCTV 3 - Tugu Adipura Rembang",
+        "video_id": "qruAIdSJsfA",
+        "thumbnail": "uploads\/tugu_adipura3.jpg",
+        "alamat": "Kutoharjo",
+        "lat": "-6.704252",
+        "lng": "111.342085"
     }
 ]

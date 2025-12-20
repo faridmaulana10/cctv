@@ -563,7 +563,7 @@ $count_total = $count_pending + $count_reviewed + $count_resolved;
     <h2>📡 CCTV PANEL</h2>
 
     <a href="dashboard.php"><i class="fa fa-chart-line"></i> Dashboard</a>
-    <a href="maps_preview_admin.php"><i class="fa fa-map"></i> User Preview</a>
+    <a href="maps.php"><i class="fa fa-map"></i> User Preview</a>
     <a href="list.php"><i class="fa fa-video"></i> Data CCTV</a>
     <a href="reports.php" class="active"><i class="fa fa-exclamation-triangle"></i> Laporan</a>
 

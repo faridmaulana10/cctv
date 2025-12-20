@@ -563,7 +563,7 @@ function cekStatusYoutube($videoId, $apiKey)
     <h2>📡 CCTV PANEL</h2>
 
     <a href="dashboard.php"><i class="fa fa-chart-line"></i> Dashboard</a>
-    <a href="maps_preview_admin.php"><i class="fa fa-map"></i> User Preview</a>
+    <a href="maps.php"><i class="fa fa-map"></i> User Preview</a>
     <a href="list.php" class="active"><i class="fa fa-video"></i> Data CCTV</a>
     <a href="reports.php" class="active"><i class="fa fa-exclamation-triangle"></i> Laporan</a>
 
@@ -663,66 +663,6 @@ function cekStatusYoutube($videoId, $apiKey)
         </table>
     </div>
 </div>
-
-<!-- Footer -->
-<footer class="footer">
-    <div class="footer-content">
-        <div class="footer-section">
-            <!-- Logo Footer -->
-            <!-- <img src="uploads/logo.png" alt="Logo CCTV" class="footer-logo" onerror="this.style.display='none'"> -->
-            <h3>
-                <i class="fas fa-video"></i>
-                CCTV Monitoring System
-            </h3>
-            <p>
-                Sistem monitoring CCTV modern untuk Kabupaten Rembang. 
-                Memantau keamanan dan lalu lintas kota secara real-time dengan teknologi terkini.
-            </p>
-            <div class="social-links">
-                <a href="https://www.facebook.com/ghost" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.tiktok.com/@rembangkab" title="TikTok"><i class="fab fa-tiktok"></i></a>
-                <a href="https://www.instagram.com/rembangkab" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://maps.app.goo.gl/EC8tH7vLzesceoes9" title="Lokasi"><i class="fas fa-map-marker-alt"></i></a>
-            </div>
-        </div>
-
-        <div class="footer-section">
-            <h3>
-                <i class="fas fa-clock"></i>
-                Waktu Pelayanan
-            </h3>
-            <div class="schedule-item">
-                <p><span class="schedule-day">Senin - Kamis</span>
-                <span class="schedule-time">07:30 - 16:00</span></p>
-            </div>
-            <div class="schedule-item">
-                <p><span class="schedule-day">Jumat</span>
-                <span class="schedule-time">07:30 - 11:00</span></p>
-            </div>
-            <div class="schedule-item">
-                <p><span class="schedule-day">Sabtu - Minggu</span>
-                <span class="schedule-closed">LIBUR</span></p>
-            </div>
-        </div>
-
-        <div class="footer-section">
-            <h3>
-                <i class="fas fa-info-circle"></i>
-                Informasi
-            </h3>
-            <ul class="footer-links">
-                <li><a href="https://dinkominfo.rembangkab.go.id"><i class="fas fa-chevron-right"></i> Tentang Kami</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="footer-bottom">
-        <p>
-            &copy; <?= date('Y') ?> <strong>CCTV Monitoring System</strong> - Kabupaten Rembang. 
-            All Rights Reserved. Made with <i class="fas fa-heart" style="color: #ef4444;"></i> by Tim Pengembang
-        </p>
-    </div>
-</footer>
 
 </body>
 </html>
